@@ -17,7 +17,8 @@ The objective is simple: **find the key and reach the exit**.
 - Reach the exit to complete the level.
 - Try to finish with the fewest moves and improve your score.
 
-**Planned features:**
+### Planned Features
+
 - Three levels of increasing difficulty
 - Keyboard movement controls
 - Move counter and scoring system
@@ -93,8 +94,7 @@ python -m flask --app app run --debug
 
 http://127.0.0.1:5000
 
-Note: The Flask server will work once the application routes have been implemented. The debug server is intended for local development only.
-
+> **Note:** The Flask server will work once the application routes have been implemented. The debug server is intended for local development only.
 
 ## 🎮 Gameplay
 
@@ -129,8 +129,8 @@ Game progress and scores will be stored on the server.
 
 | Team Member | Responsibilities |
 | --- | --- |
-| [@antonsec](https://github.com/antonsec) |
-| [@omie957] (https://github.com/omie957) |
+| [@antonsec](https://github.com/antonsec) | To be decided |
+| [@omie957](https://github.com/omie957) | To be decided |
 
 Both members will contribute to planning, development, testing, debugging, and documentation.
 
@@ -167,4 +167,4 @@ The published application link will be added once deployment is complete.
 
 Programming Project 2: Game-Themed Web Application
 
-Project repository: https://github.com/antonsec/tile-quest
+**Project Repository:** https://github.com/antonsec/tile-quest
