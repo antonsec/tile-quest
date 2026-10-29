@@ -1,1 +1,26 @@
+
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tile Quest</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='game.js') }}" defer></script>
+</head>
+
+<body>
+    <main class="menu">
+
+        <h1>Tile Quest</h1>
+        <p>Collect the key. Escape the maze.</p>
+
+        <div class="menu-buttons">
+            <button id="play-btn" type="button">Play Game</button>
+            <button id="instructions-btn" type="button">How to Play</button>
+            <button id="scores-btn" type="button">High Scores</button>
+        </div>
+
+    </main>
+</body>
+</html>
