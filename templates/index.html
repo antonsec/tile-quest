@@ -25,15 +25,28 @@
         <p id="instructions" hidden>Use WASD, arrow keys or the direction buttons. Avoid walls, collect the key and reach the exit in as few moves as possible. Reopen a walking route for a more walkable neighborhood, inspired by SDG 11.</p>
         <section id="game-view" aria-label="Level 1">
             <div class="level-heading"><h2>Neighborhood Walkway</h2><span class="level-tag">Level 1</span></div>
-            <div class="game-stats"><p>Moves <strong id="move-count">0</strong></p><p id="key-status">🗝 Key to find</p></div>
+            <div class="game-stats">
+                <p>Moves <strong id="move-count">0</strong></p>
+                <button id="restart-btn" type="button">Restart</button>
+                <p id="key-status">🗝 Key to find</p>
+            </div>
             <p id="game-status" role="status">Select Play Game to begin.</p>
-            <div id="game-board" aria-label="Game board"><p class="board-intro">🧭<br>Your adventure starts here.<br><small>Press Play Game to explore.</small></p></div>
+            <div id="game-board" aria-label="Game board">
+                <p class="board-intro">
+                    <span aria-hidden="true">🔒</span>
+                    Find the key and reopen the neighborhood walkway.
+                </p>
+            </div>
+            <ul class="tile-legend" aria-label="Tile legend">
+                <li><span aria-hidden="true">🌿</span> Hedge</li>
+                <li><span aria-hidden="true">🗝</span> Key</li>
+                <li><span aria-hidden="true">🔒 / 🚪</span> Exit</li>
+            </ul>
             <div class="controls">
                 <button type="button" data-direction="up" aria-label="Move up">↑</button>
                 <button type="button" data-direction="left" aria-label="Move left">←</button>
                 <button type="button" data-direction="down" aria-label="Move down">↓</button>
                 <button type="button" data-direction="right" aria-label="Move right">→</button>
-                <button id="restart-btn" type="button">Restart</button>
             </div>
         </section>
         <p class="keyboard-hint">Move with WASD, arrow keys or the buttons above.</p>

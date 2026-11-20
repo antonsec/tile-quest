@@ -29,14 +29,14 @@ async function sendRequest(url, body) {
 function drawGame() {
     board.replaceChildren();
     board.style.gridTemplateColumns = "repeat(" + game.board[0].length + ", 1fr)";
-    const labels = {".": "Floor",
-        "#": "Wall",
+    const labels = {".": "Path",
+        "#": "Hedge",
         "K": "Key",
-        "E": "Exit"};
+        "E": game.has_key ? "Unlocked exit" : "Locked exit"};
     const symbols = {".": "",
-        "#": "🪨",
+        "#": "🌿",
         "K": "🗝",
-        "E": "🚩"};
+        "E": game.has_key ? "🚪" : "🔒"};
     const classes = {".": "floor",
         "#": "wall",
         "K": "key",
@@ -49,9 +49,12 @@ function drawGame() {
             square.textContent = symbols[tile];
             square.setAttribute("role", "img");
             square.setAttribute("aria-label", labels[tile]);
+            if (tile === "E" && game.has_key) {
+                square.classList.add("tile--unlocked");
+            }
             if (game.player.row === row && game.player.col === col) {
                 square.classList.add("tile--player");
-                square.textContent = "🧑‍🚀";
+                square.textContent = "🚶";
                 square.setAttribute("aria-label", "You");
             }
             board.append(square);
@@ -60,14 +63,14 @@ function drawGame() {
     document.querySelector("#move-count").textContent = game.moves;
     document.querySelector("#key-status").textContent = "🗝 Key to find";
     status.className = "";
-    status.textContent = "Find the key, then head for the flag!";
+    status.textContent = "Find the key to unlock the exit.";
     if (game.has_key) {
-        document.querySelector("#key-status").textContent = "🗝 Key collected!";
-        status.textContent = "You found the key! The flag is ready for you.";
+        document.querySelector("#key-status").textContent = "🔓 Exit unlocked";
+        status.textContent = "You found the key! Head to the exit.";
     }
     if (game.blocked_reason) {
         const messages = {
-            wall: "A rock blocks the way. Try another path!",
+            wall: "A hedge blocks the way. Try another path!",
             boundary: "That is the edge of the map. Try another direction!",
             locked_exit: "Almost there! Find the key to unlock the exit.",
             completed: "Quest complete! Ready for another try?"
@@ -76,7 +79,7 @@ function drawGame() {
     }
     if (game.completed) {
         status.className = "is-complete";
-        status.textContent = "🎉 Route reopened! You finished in " + game.moves + " moves.";
+        status.textContent = "🎉 Walkway reopened in " + game.moves + " moves!";
     }
 }
 
