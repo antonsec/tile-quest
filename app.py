@@ -9,26 +9,25 @@ BOARD = [".#.E",
          "...#",
          "..#K",
          "...."]
+
 # level 2 has a larger map and a longer route to the key
-BOARD_2 = [".....E",
+BOARD_2 = [".....K",
            ".#####",
            ".....#",
            "####.#",
-           "K....#",
+           "E.#..#",
            "....##"]
 # these are the only movement commands the game accepts
 DIRECTIONS = ["up", "down", "left", "right"]
+
 # save completed move counts in this text file
 SCORES_FILE = "data/scores.txt"
 
 # store active games here, using each game id as the dictionary key
 runs = {}
 
-
-# run this function when someone opens the home page
 @app.route("/")
 def home():
-    # send the html page to the browser
     return render_template("index.html")
 
 
@@ -37,6 +36,7 @@ def home():
 def start():
     # read the json sent by the browser; invalid json becomes none
     data = request.get_json(silent=True)
+
     # the request must contain an object, such as {"level": 1}
     # reject missing json, lists and other invalid request bodies
     if not isinstance(data, dict):
@@ -45,6 +45,7 @@ def start():
     # only a whole number is accepted as the level
     if type(data.get("level")) is not int:
         return {"error": "Send an integer level."}, 400
+    
     # accept either of the two available levels
     if data["level"] not in [1, 2]:
         return {"error": "Level not found."}, 404
@@ -58,6 +59,7 @@ def start():
 
     # number each new game and convert the number to text
     run_id = str(len(runs) + 1)
+
     # create the starting information for this game
     game = {
         "run_id": run_id,
@@ -75,6 +77,7 @@ def start():
     }
     # keep the game on the server so later moves can find it
     runs[run_id] = game
+
     # flask turns the dictionary into json; 201 means created
     return game, 201
 
@@ -102,6 +105,7 @@ def move():
 
     # find the saved game for this request
     game = runs[run_id]
+
     # calculate the next square without moving the player yet
     # rows increase going down; columns increase going right
     row = game["player"]["row"]
@@ -167,12 +171,12 @@ def scores():
 
         moves = []
         try:
-            # each line holds one finished game's move count
+            # each line holds one finished games move count
             with open(filename) as file:
                 for line in file:
                     moves.append(int(line))
         except FileNotFoundError:
-            # this level has no scores yet, so continue with the next one
+            # this level has no scores yet so continue with the next one
             continue
 
         # keep the best ten scores for this level
@@ -182,7 +186,6 @@ def scores():
     return {"scores": scores}
 
 
-# start the server when running this file directly with python3 app.py
+# start the server
 if __name__ == "__main__":
-    # listen on this computer at http://127.0.0.1:5000
     app.run(host="127.0.0.1", port=5000)
