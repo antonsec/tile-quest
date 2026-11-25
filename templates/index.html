@@ -22,9 +22,14 @@
             <button id="scores-btn" type="button">High Scores</button>
         </div>
 
+        <div id="level-choices" hidden>
+            <p>Choose your quest</p>
+            <button type="button" data-level="1">Level 1 · Walkway</button>
+            <button type="button" data-level="2">Level 2 · Garden</button>
+        </div>
         <p id="instructions" hidden>Use WASD, arrow keys or the direction buttons. Avoid walls, collect the key and reach the exit in as few moves as possible. Reopen a walking route for a more walkable neighborhood, inspired by SDG 11.</p>
         <section id="game-view" aria-label="Level 1">
-            <div class="level-heading"><h2>Neighborhood Walkway</h2><span class="level-tag">Level 1</span></div>
+            <div class="level-heading"><h2 id="level-title">Neighborhood Walkway</h2><span class="level-tag">Level 1</span></div>
             <div class="game-stats">
                 <p>Moves <strong id="move-count">0</strong></p>
                 <button id="restart-btn" type="button">Restart</button>

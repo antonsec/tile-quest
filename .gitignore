@@ -6,3 +6,5 @@ data/scores.txt
 
 /FRONTEND_HANDOFF.md
 /outputs/
+
+data/scores-*.txt

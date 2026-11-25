@@ -2,6 +2,7 @@ const board = document.querySelector("#game-board");
 const status = document.querySelector("#game-status");
 let game = null;
 let busy = false;
+let selectedLevel = 1;
 
 // Send one request at a time and show errors beside the board.
 async function sendRequest(url, body) {
@@ -33,14 +34,17 @@ function drawGame() {
         "#": "Hedge",
         "K": "Key",
         "E": game.has_key ? "Unlocked exit" : "Locked exit"};
+
     const symbols = {".": "",
         "#": "🌿",
         "K": "🗝",
         "E": game.has_key ? "🚪" : "🔒"};
+
     const classes = {".": "floor",
         "#": "wall",
         "K": "key",
         "E": "exit"};
+
     for (let row = 0; row < game.board.length; row++) {
         for (let col = 0; col < game.board[row].length; col++) {
             const tile = game.board[row][col];
@@ -49,6 +53,7 @@ function drawGame() {
             square.textContent = symbols[tile];
             square.setAttribute("role", "img");
             square.setAttribute("aria-label", labels[tile]);
+
             if (tile === "E" && game.has_key) {
                 square.classList.add("tile--unlocked");
             }
@@ -60,14 +65,20 @@ function drawGame() {
             board.append(square);
         }
     }
+
+    document.querySelector("#level-title").textContent = game.title;
+    document.querySelector(".level-tag").textContent = "Level " + game.level;
+    document.querySelector("#game-view").setAttribute("aria-label", "Level " + game.level);
     document.querySelector("#move-count").textContent = game.moves;
     document.querySelector("#key-status").textContent = "🗝 Key to find";
     status.className = "";
     status.textContent = "Find the key to unlock the exit.";
+
     if (game.has_key) {
         document.querySelector("#key-status").textContent = "🔓 Exit unlocked";
         status.textContent = "You found the key! Head to the exit.";
     }
+
     if (game.blocked_reason) {
         const messages = {
             wall: "A hedge blocks the way. Try another path!",
@@ -85,7 +96,7 @@ function drawGame() {
 
 function startGame() {
     if (!busy) {
-        sendRequest("/api/start", {level: 1});
+        sendRequest("/api/start", {level: selectedLevel});
     }
 }
 
@@ -100,11 +111,15 @@ document.querySelector("#restart-btn").addEventListener("click", startGame);
 document.querySelector("#instructions-btn").addEventListener("click", function () {
     const instructions = document.querySelector("#instructions");
     instructions.hidden = !instructions.hidden;
+
 });
 document.querySelector("#levels-btn").addEventListener("click", function () {
-    status.textContent = "Level 1 is available. Select Play Game to start.";
+    const choices = document.querySelector("#level-choices");
+    choices.hidden = !choices.hidden;
 });
+
 document.querySelector("#scores-btn").addEventListener("click", async function () {
+
     const list = document.querySelector("#scores-list");
     list.replaceChildren();
     try {
@@ -126,8 +141,13 @@ document.querySelector("#scores-btn").addEventListener("click", async function (
     }
 });
 
-const directions = {ArrowUp: "up", ArrowDown: "down", ArrowLeft: "left", ArrowRight: "right",
-    w: "up", s: "down", a: "left", d: "right"};
+const directions = {
+    ArrowUp: "up",
+    ArrowDown: "down",
+    ArrowLeft: "left",
+    ArrowRight: "right",
+    w: "up", s: "down",
+    a: "left", d: "right"};
 document.addEventListener("keydown", function (event) {
     if (directions[event.key] && game) {
         event.preventDefault();
@@ -137,5 +157,15 @@ document.addEventListener("keydown", function (event) {
 for (const button of document.querySelectorAll("[data-direction]")) {
     button.addEventListener("click", function () {
         move(button.dataset.direction);
+    });
+}
+
+// choose a level and start it; restart also uses this selected level
+for (const button of document.querySelectorAll("[data-level]")) {
+    button.addEventListener("click", function () {
+        if (!busy) {
+            selectedLevel = Number(button.dataset.level);
+            startGame();
+        }
     });
 }
