@@ -141,12 +141,12 @@ Both members will contribute to planning, development, testing, debugging, and d
 - [x] Set up Python environment
 - [x] Install Flask
 - [x] Create project structure
-- [ ] Implement Flask homepage
-- [ ] Design main menu
-- [ ] Create game board
-- [ ] Implement player movement
-- [ ] Add obstacles, keys, and exits
-- [ ] Add multiple levels
+- [x] Implement Flask homepage
+- [x] Design main menu
+- [x] Create game board
+- [x] Implement player movement
+- [x] Add obstacles, keys, and exits
+- [x] Add multiple levels
 - [ ] Implement API communication
 - [ ] Implement server-side data storage
 - [ ] Create high-score leaderboard

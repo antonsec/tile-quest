@@ -176,7 +176,7 @@ def scores():
                 for line in file:
                     moves.append(int(line))
         except FileNotFoundError:
-            # this level has no scores yet so continue with the next one
+            # level has no scores yet so continue with the next one
             continue
 
         # keep the best ten scores for this level
