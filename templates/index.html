@@ -18,8 +18,8 @@
         class="menu-buttons"
         data-view
         tabindex="-1"
-        aria-label="Main menu"
-      > 
+        aria-label="Main menu">
+
         <button id="play-btn" type="button">▶ Play Game</button>
         <button id="instructions-btn" type="button">How to Play</button>
         <button id="levels-btn" type="button">Levels</button>
@@ -68,6 +68,7 @@
           <p id="key-status">🗝 Key to find</p>
         </div>
         <p id="game-status" role="status">Select Play Game to begin.</p>
+        <button id="next-level-btn" type="button" hidden>Next level</button>
         <div id="game-board" aria-label="Game board">
           <p class="board-intro">
             <span aria-hidden="true">🔒</span>
@@ -102,8 +103,8 @@
         data-view
         tabindex="-1"
         aria-label="High scores"
-        hidden
-      >
+        hidden>
+
         <h2>🏆 High scores</h2>
         <p id="scores-status" role="status"></p>
         <ol id="scores-list" aria-live="polite">

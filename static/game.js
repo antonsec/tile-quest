@@ -50,6 +50,7 @@ async function sendRequest(url, body) {
 
     // store the server result and redraw the screen
     game = data;
+
     drawGame();
     // show feedback if the request or response fails
   } catch (error) {
@@ -144,6 +145,11 @@ function drawGame() {
     };
     status.textContent = messages[game.blocked_reason];
   }
+
+  // hide the button until player wins and another level exists
+  const nextLevelButton = document.querySelector("#next-level-btn");
+  nextLevelButton.hidden = !game.completed || game.level >= 3;
+
   // highlight the win message and display the final move count
   if (game.completed) {
     status.className = "is-complete";
@@ -170,6 +176,14 @@ function move(direction) {
 // run startgame when play or restart is clicked
 document.querySelector("#play-btn").addEventListener("click", startGame);
 document.querySelector("#restart-btn").addEventListener("click", startGame);
+
+// select the level after the one the player just finished
+document.querySelector("#next-level-btn").addEventListener("click", function () {
+  if (!busy && game && game.completed && game.level < 3) {
+    selectedLevel = game.level + 1;
+    startGame();
+  }
+});
 
 // open the instructions or level selection screen
 document.querySelector("#instructions-btn").addEventListener("click", function () {
