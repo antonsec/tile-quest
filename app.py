@@ -17,6 +17,11 @@ BOARD_2 = [".....K",
            "####.#",
            "E.#..#",
            "....##"]
+
+BOARD_3 = [".....#..E",
+           "##.....##",
+           "...#####K",
+           "........."]
 # these are the only movement commands the game accepts
 DIRECTIONS = ["up", "down", "left", "right"]
 
@@ -47,15 +52,20 @@ def start():
         return {"error": "Send an integer level."}, 400
     
     # accept either of the two available levels
-    if data["level"] not in [1, 2]:
+    if data["level"] not in [1, 2, 3]:
         return {"error": "Level not found."}, 404
 
     # choose the map and title for the requested level
     board = BOARD
     title = "Neighborhood Walkway"
+
     if data["level"] == 2:
         board = BOARD_2
         title = "Community Garden"
+
+    elif data["level"] == 3:
+        board = BOARD_3
+        title = "Grocery Store"
 
     # number each new game and convert the number to text
     run_id = str(len(runs) + 1)

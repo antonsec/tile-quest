@@ -4,10 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tile Quest</title>
-    <link
-      rel="stylesheet"
-      href="/static/style.css"
-    />
+    <link rel="stylesheet" href="/static/style.css" />
     <script src="/static/game.js" defer></script>
   </head>
 
@@ -16,7 +13,13 @@
       <h1>Tile Quest<span class="title-dot">.</span></h1>
       <p>A little key. A big adventure.</p>
 
-      <section id="menu-view" class="menu-buttons" data-view tabindex="-1" aria-label="Main menu">
+      <section
+        id="menu-view"
+        class="menu-buttons"
+        data-view
+        tabindex="-1"
+        aria-label="Main menu"
+      > 
         <button id="play-btn" type="button">▶ Play Game</button>
         <button id="instructions-btn" type="button">How to Play</button>
         <button id="levels-btn" type="button">Levels</button>
@@ -24,18 +27,37 @@
       </section>
 
       <button id="menu-btn" type="button" hidden>← Main menu</button>
-      <section id="level-choices" data-view tabindex="-1" aria-label="Choose a level" hidden>
+      <section
+        id="level-choices"
+        data-view
+        tabindex="-1"
+        aria-label="Choose a level"
+        hidden
+      >
         <p>Choose your quest</p>
         <button type="button" data-level="1">Level 1 · Walkway</button>
         <button type="button" data-level="2">Level 2 · Garden</button>
+        <button type="button" data-level="3">Level 3 · Store</button>
       </section>
-      <section id="instructions" data-view tabindex="-1" aria-label="How to play" hidden>
+      <section
+        id="instructions"
+        data-view
+        tabindex="-1"
+        aria-label="How to play"
+        hidden
+      >
         <h2>How to play</h2>
         Use WASD, arrow keys or the direction buttons. Avoid walls, collect the
         key and reach the exit in as few moves as possible. Reopen a walking
         route for a more walkable neighborhood, inspired by SDG 11.
       </section>
-      <section id="game-view" data-view tabindex="-1" aria-label="Level 1" hidden>
+      <section
+        id="game-view"
+        data-view
+        tabindex="-1"
+        aria-label="Level 1"
+        hidden
+      >
         <div class="level-heading">
           <h2 id="level-title">Neighborhood Walkway</h2>
           <span class="level-tag">Level 1</span>
@@ -71,16 +93,22 @@
             →
           </button>
         </div>
-      <p class="keyboard-hint">
-        Move with WASD, arrow keys or the buttons above.
-      </p>
+        <p class="keyboard-hint">
+          Move with WASD, arrow keys or the buttons above.
+        </p>
       </section>
-      <section id="scores-view" data-view tabindex="-1" aria-label="High scores" hidden>
-      <h2>🏆 High scores</h2>
-      <p id="scores-status" role="status"></p>
-      <ol id="scores-list" aria-live="polite">
-        <li>Finish a quest, then check your best runs.</li>
-      </ol>
+      <section
+        id="scores-view"
+        data-view
+        tabindex="-1"
+        aria-label="High scores"
+        hidden
+      >
+        <h2>🏆 High scores</h2>
+        <p id="scores-status" role="status"></p>
+        <ol id="scores-list" aria-live="polite">
+          <li>Finish a quest, then check your best runs.</li>
+        </ol>
       </section>
     </main>
   </body>
