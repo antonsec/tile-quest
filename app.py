@@ -86,7 +86,7 @@ def start():
 @app.route("/api/move", methods=["POST"])
 def move():
     # read the json sent by the browser; invalid json becomes none
-    data = request.get_json(silent=True)
+    data = request.get_json()
     # reject missing json, lists and other invalid request bodies
     if not isinstance(data, dict):
         return {"error": "Send a JSON object."}, 400

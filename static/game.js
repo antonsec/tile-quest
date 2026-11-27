@@ -11,6 +11,20 @@ let busy = false;
 // begin with level 1 and update this when a level button is clicked
 let selectedLevel = 1;
 
+// hide every screen except the one requested
+function showView(id) {
+  for (const view of document.querySelectorAll("[data-view]")) {
+    view.hidden = view.id !== id;
+  }
+  document.querySelector("#menu-btn").hidden = id === "menu-view";
+  document.getElementById(id).focus();
+}
+
+// return to the menu without changing the saved game
+document.querySelector("#menu-btn").addEventListener("click", function () {
+  showView("menu-view");
+});
+
 // send one request at a time and show errors beside the board
 async function sendRequest(url, body) {
   // block more start and move requests until this one finishes
@@ -140,13 +154,14 @@ function drawGame() {
 // start a fresh run of the selected level, including when restarting
 function startGame() {
   if (!busy) {
+    showView("game-view");
     sendRequest("/api/start", { level: selectedLevel });
   }
 }
 
 // move only while a game is active and ready
 function move(direction) {
-  if (game && !game.completed && !busy) {
+  if (game && !game.completed && !busy && !document.querySelector("#game-view").hidden) {
     // include the run id so the server updates the correct game
     sendRequest("/api/move", { run_id: game.run_id, direction: direction });
   }
@@ -156,25 +171,22 @@ function move(direction) {
 document.querySelector("#play-btn").addEventListener("click", startGame);
 document.querySelector("#restart-btn").addEventListener("click", startGame);
 
-// show/hide the instructions when the button is clicked
-document
-  .querySelector("#instructions-btn")
-  .addEventListener("click", function () {
-    const instructions = document.querySelector("#instructions");
-    // ! reverses the current true or false value
-    instructions.hidden = !instructions.hidden;
-  });
-
-// show/hide the available level buttons
+// open the instructions or level selection screen
+document.querySelector("#instructions-btn").addEventListener("click", function () {
+  showView("instructions");
+});
 document.querySelector("#levels-btn").addEventListener("click", function () {
-  const choices = document.querySelector("#level-choices");
-  choices.hidden = !choices.hidden;
+  showView("level-choices");
 });
 
 // load saved scores when the high scores button is clicked
 document
   .querySelector("#scores-btn")
   .addEventListener("click", async function () {
+    // open the results screen immediately, before waiting for the server
+    showView("scores-view");
+    const scoreStatus = document.querySelector("#scores-status");
+    scoreStatus.textContent = "Loading scores…";
     const list = document.querySelector("#scores-list");
     // remove the previous results before loading the current scores
     list.replaceChildren();
@@ -194,13 +206,12 @@ document
           "Level " + score.level + ": " + score.moves + " moves";
         list.append(item);
       }
-      // explain why the list is empty before any games have been won
+      scoreStatus.textContent = "";
       if (data.scores.length === 0) {
-        list.textContent = "Complete a level to save a score.";
+        scoreStatus.textContent = "Complete a level to save a score.";
       }
-      // show feedback if the request or response fails
     } catch (error) {
-      list.textContent = "Could not load scores. Try again.";
+      scoreStatus.textContent = "Could not load scores. Return to the menu and try again.";
     }
   });
 
@@ -218,7 +229,7 @@ const directions = {
 
 // listen for movement keys anywhere on the page
 document.addEventListener("keydown", function (event) {
-  if (directions[event.key] && game) {
+  if (directions[event.key] && game && !document.querySelector("#game-view").hidden) {
     // stop arrow keys from scrolling the page during a game
     event.preventDefault();
     move(directions[event.key]);

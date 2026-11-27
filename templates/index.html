@@ -6,9 +6,9 @@
     <title>Tile Quest</title>
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
+      href="/static/style.css"
     />
-    <script src="{{ url_for('static', filename='game.js') }}" defer></script>
+    <script src="/static/game.js" defer></script>
   </head>
 
   <body>
@@ -16,24 +16,26 @@
       <h1>Tile Quest<span class="title-dot">.</span></h1>
       <p>A little key. A big adventure.</p>
 
-      <div class="menu-buttons">
+      <section id="menu-view" class="menu-buttons" data-view tabindex="-1" aria-label="Main menu">
         <button id="play-btn" type="button">▶ Play Game</button>
         <button id="instructions-btn" type="button">How to Play</button>
         <button id="levels-btn" type="button">Levels</button>
         <button id="scores-btn" type="button">High Scores</button>
-      </div>
+      </section>
 
-      <div id="level-choices" hidden>
+      <button id="menu-btn" type="button" hidden>← Main menu</button>
+      <section id="level-choices" data-view tabindex="-1" aria-label="Choose a level" hidden>
         <p>Choose your quest</p>
         <button type="button" data-level="1">Level 1 · Walkway</button>
         <button type="button" data-level="2">Level 2 · Garden</button>
-      </div>
-      <p id="instructions" hidden>
+      </section>
+      <section id="instructions" data-view tabindex="-1" aria-label="How to play" hidden>
+        <h2>How to play</h2>
         Use WASD, arrow keys or the direction buttons. Avoid walls, collect the
         key and reach the exit in as few moves as possible. Reopen a walking
         route for a more walkable neighborhood, inspired by SDG 11.
-      </p>
-      <section id="game-view" aria-label="Level 1">
+      </section>
+      <section id="game-view" data-view tabindex="-1" aria-label="Level 1" hidden>
         <div class="level-heading">
           <h2 id="level-title">Neighborhood Walkway</h2>
           <span class="level-tag">Level 1</span>
@@ -69,14 +71,17 @@
             →
           </button>
         </div>
-      </section>
       <p class="keyboard-hint">
         Move with WASD, arrow keys or the buttons above.
       </p>
+      </section>
+      <section id="scores-view" data-view tabindex="-1" aria-label="High scores" hidden>
       <h2>🏆 High scores</h2>
+      <p id="scores-status" role="status"></p>
       <ol id="scores-list" aria-live="polite">
         <li>Finish a quest, then check your best runs.</li>
       </ol>
+      </section>
     </main>
   </body>
 </html>

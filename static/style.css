@@ -10,6 +10,7 @@ body {
     background-size: 20px 20px;
     color: #183d2c;
 }
+
 .menu {
     max-width: 620px;
     margin: 20px auto;
@@ -20,10 +21,14 @@ body {
     box-shadow: 0 8px 0 #092017;
 }
 h1 { margin: 0; font-size: clamp(36px, 8vw, 54px); font-weight: 900; letter-spacing: -2px; }
+
 .title-dot { color: #55933b; }
+
 h1 + p { margin: 4px 0 24px; color: #516a55; }
 h2 { font-size: 20px; }
+
 .menu-buttons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+
 button {
     padding: 12px;
     font: inherit;
@@ -35,17 +40,21 @@ button {
     box-shadow: 0 4px 0 #94b879;
     cursor: pointer;
 }
+
 button:hover { background: #cde3b6; }
 button:active { transform: translateY(3px); box-shadow: 0 1px 0 #94b879; }
 button:focus-visible { outline: 3px solid #bd791b; outline-offset: 4px; }
+
 #play-btn { grid-column: 1 / -1; background: #2f703e; border-color: #20512b; color: white; font-size: 19px; }
 #play-btn:hover { background: #245c32; }
 #instructions { background: #fff0d3; border-radius: 12px; padding: 16px; line-height: 1.6; }
 #game-view { margin-top: 30px; }
+
 .level-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .level-heading h2 { margin: 0; }
 .level-tag { background: #e3efdf; color: #4a6844; border-radius: 8px; padding: 6px 10px; white-space: nowrap; font-size: 13px; font-weight: 800; }
 .game-stats { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-weight: 700; font-size: 14px; }
+
 #key-status { margin-left: auto; }
 #move-count { display: inline-block; padding: 2px 10px; background: #d5e8c3; border-radius: 6px; }
 #game-board {
@@ -59,6 +68,7 @@ button:focus-visible { outline: 3px solid #bd791b; outline-offset: 4px; }
     border-radius: 18px;
     box-shadow: 0 5px 0 #1c3e24;
 }
+
 .board-intro { align-self: center; color: #fff; text-align: center; line-height: 2; font-weight: 800; }
 .board-intro span { display: block; font-size: 36px; }
 .tile-legend {
@@ -72,6 +82,7 @@ button:focus-visible { outline: 3px solid #bd791b; outline-offset: 4px; }
     font-size: 14px;
     font-weight: 700;
 }
+
 .tile {
     min-width: 0;
     aspect-ratio: 1;
@@ -82,11 +93,13 @@ button:focus-visible { outline: 3px solid #bd791b; outline-offset: 4px; }
     box-shadow: inset 0 -4px 0 #cdbb93;
     font-size: clamp(24px, 6vw, 42px);
 }
+
 .tile--wall { background: #315c38; box-shadow: inset 0 -4px 0 #23452a; }
 .tile--key { background: #ffe2a0; box-shadow: inset 0 -4px 0 #e2bc67; }
 .tile--exit { background: #d5cfc1; box-shadow: inset 0 -4px 0 #ada495; }
 .tile--unlocked { background: #c9e5b5; box-shadow: inset 0 -4px 0 #a6c28d; }
 .tile--player { outline: 3px solid #2f703e; outline-offset: -3px; background: #c2ec9c; }
+
 #game-status { min-height: 3em; margin: 8px 0; font-size: 15px; line-height: 1.5; }
 #game-status.is-complete {
     padding: 10px 12px;
@@ -95,12 +108,17 @@ button:focus-visible { outline: 3px solid #bd791b; outline-offset: 4px; }
     color: #234b30;
     font-weight: 900;
 }
+
 .controls { display: grid; grid-template-columns: repeat(3, 48px); justify-content: center; gap: 8px; }
 .controls button { min-height: 48px; padding: 8px; font-size: 20px; }
 .controls [data-direction="up"] { grid-column: 1 / -1; justify-self: center; width: 48px; }
+
 #restart-btn { padding: 8px 12px; font-size: 14px; }
+
 .keyboard-hint { color: #516a55; text-align: center; font-size: 12px; margin-top: 18px; }
+
 #scores-list { padding-left: 24px; color: #516a55; line-height: 1.8; }
+
 [hidden] { display: none; }
 @media (max-width: 440px) {
     .menu { padding: 20px 16px; margin: 0 auto; }
